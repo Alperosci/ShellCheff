@@ -5,7 +5,7 @@ A tool that quickly generates PowerShell Reverse Shell commands to get remote ac
 
 Clone the repository :
 ```bash
-https://github.com/Alperosci/ShellCheff.git
+git clone https://github.com/Alperosci/ShellCheff.git
 cd ShellCheff
 ```
 
