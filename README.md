@@ -1,5 +1,5 @@
 # ShellCheff
-A program that allows you to make ReverseShell attacks FAST, incredibly FAST
+A tool that quickly generates PowerShell Reverse Shell commands to get remote access FAST, incredibly FAST.
 
 # Installation
 
