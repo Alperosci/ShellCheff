@@ -26,6 +26,10 @@ then
 fi
 
 echo "[*] Installing required Python packages..."
-sudo pip3 install --user art --break-system-packages
+sudo pip3 install art --break-system-packages
+sudo pip3 install argparse --break-system-packages
+
+echo "[*] Installing required APT packages..."
+sudo apt install netcat
 
 echo "Installation Complete! You can write '$SCRIPT_NAME' to terminal to use it."
